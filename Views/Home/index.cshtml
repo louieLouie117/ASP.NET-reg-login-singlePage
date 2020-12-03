@@ -1,0 +1,30 @@
+@using WeddingPlanner.Models
+@model indexWrapper
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hope</title>
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<body>
+    <div class="regHeader_container">
+        <div>
+            <h1>Register</h1>
+            <partial name="regPartial" model="@Model.regUser" view-data="ViewData" />
+        </div>
+        <div>
+            <h1>Login</h1>
+            <partial name="loginPartial" model="@Model.LogInAUser" view-data="ViewData" />
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

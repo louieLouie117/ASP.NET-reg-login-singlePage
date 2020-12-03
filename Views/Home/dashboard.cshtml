@@ -1,0 +1,64 @@
+@using WeddingPlanner.Models;
+@model List<Wedding>;
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div class="dashboardHeader_container">
+        <h1>Welcome @ViewBag.DisplayUser.FirstName, to Wedding planner</h1>
+        <a href="/logout"> logout</a>
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Wedding</th>
+                <th>Date</th>
+                <th>Guest</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><a href="/weddingInfo/@item.WeddingId">@item.WedderOne & @item.WedderTwo</a></td>
+                    <td>@item.WeddingDay</td>
+                    <td>@item.GuestLists.Count</td>
+                    <td>
+                        @if (item.GuestLists.Any(g => g.UserId == ViewBag.DisplayUser.UserId))
+                        {
+                            <a href="/removeRSVP/@item.WeddingId/@ViewBag.DisplayUser.UserId">Un-RSVP</a>
+                        }
+                        else
+                        {
+                            <a href="rsvpUser/@item.WeddingId/@ViewBag.DisplayUser.UserId">RSVP</a>
+                        }
+
+                        @if (item.UserId == ViewBag.DisplayUser.UserId)
+                        {
+                            <a href="/delete/@item.WeddingId">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+
+    <a href="/goToPlanWedding"><button>New Wedding</button></a>
+
+</body>
+
+</html>
